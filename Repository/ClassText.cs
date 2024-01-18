@@ -6,9 +6,11 @@
 
         public ClassText()
         {
-            _fishText = "FootKnight";
+            // Initialize private variables
+            _fishText = "Encrypto-Shiba Inc.\nWe Encrypt YOUR $H!7, so you don't have to B)";
         }
 
+        // Declare properties
         public string fishText
         {
             get { return _fishText; }
@@ -22,6 +24,7 @@
             }
         }
 
+        // Overrides the ToString() method to return the fishText property
         public override string ToString()
         {
             return fishText;

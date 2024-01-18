@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Text;
 
 namespace BIZ
 {
     public class ClassRollingDecryptText
     {
+        // Declare private variables
         private List<string> listStringKey;
         private int keyJump = 3;
         private int keyUp = 3;
@@ -17,6 +17,7 @@ namespace BIZ
 
         public ClassRollingDecryptText(List<string> inKey)
         {
+            // Initialize private variables
             listStringKey = inKey;
         }
 
@@ -49,14 +50,16 @@ namespace BIZ
                     }
                 }
             }
-            // TODO: Set up string res as empty string,  Initialize encoder and byte array asciiBytes
-            // Seperate dummy text and encrypted text, and add encrypted text to tempString and
-            // send to MakeCharOfCode() to get decrypted char (Go to MakeCharOfCode() for
-            // pseudo on what happens in the method)
+
+            keyJump = 3; // Reset keyJump
             return res;
         }
 
-        // Convert encrypted char to decrypted char
+        /// <summary>
+        /// Convert encrypted char to decrypted char
+        /// </summary>
+        /// <param name="inCharString"> Encrypted char</param>
+        /// <returns>string - Decrypted char</returns>
         private string MakeCharOfCode(string inCharString)
         {
             string res = "";
@@ -64,12 +67,15 @@ namespace BIZ
             {
                 res += GetRealRollingKey(c);
             }
-            Debug.WriteLine($"{res}");
             return $"{(char)Convert.ToInt32(res)}";
         }
 
         // TODO: Check if this is correct. 
-        // Gets the int value of the decrypted char 
+        /// <summary>
+        /// Gets the int value of the decrypted char 
+        /// </summary>
+        /// <param name="inChar"> Char to be decrypted</param>
+        /// <returns>int - The int value of the decrypted char</returns>
         private int GetRealRollingKey(char inChar)
         {
             int intChar = listStringKey.IndexOf(inChar.ToString());
@@ -79,8 +85,6 @@ namespace BIZ
                 oDigit += 10;
             }
             keyJump += keyUp;
-
-            Debug.WriteLine($"GetRealRollingKey: {oDigit}");
 
             return oDigit;
         }

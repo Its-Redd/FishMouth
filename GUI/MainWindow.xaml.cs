@@ -10,6 +10,11 @@ namespace GUI
     public partial class MainWindow : Window
     {
         ClassBIZ biz;
+
+        /// <summary>
+        /// Initializes MainWindow and all of its elements
+        /// Initializes ClassBIZ. Sets DataContext to ClassBIZ.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -39,27 +44,37 @@ namespace GUI
 
         private void EncryptButtonRollingExtra_Click(object sender, RoutedEventArgs e)
         {
-
+            biz.MakeExtraEncryptedText();
         }
 
         private void DecryptButtonRollingExtra_Click(object sender, RoutedEventArgs e)
         {
-
+            biz.MakeExtraDecryptedText();
         }
 
+        /// <summary>
+        /// Loads encrypted text from file and puts it into the clearText property of ClassBIZ (or, is supposed to)
+        /// </summary>
+        /// <param name="sender">Refers to the object that invoked the event that fired the handler</param>
+        /// <param name="e">Event argument(s)</param>
         private void LoadTextEncrypt_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.InitialDirectory = @"C:\";
-            ofd.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+            OpenFileDialog ofd = new OpenFileDialog(); // Initialize OpenFileDialog
+            ofd.InitialDirectory = @"C:\"; // Sets initial directory to C:\
+            ofd.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"; // Sets filter to only show .txt files
             ofd.FilterIndex = 1;
 
             if (ofd.ShowDialog() == true)
             {
-                biz.ReadClearTextFromFile(ofd.FileName);
+                biz.ReadClearTextFromFile(ofd.FileName); // Does nothing currently
             }
         }
 
+        /// <summary>
+        /// Saves encrypted text to a file (or, is supposed to)
+        /// </summary>
+        /// <param name="sender">Refers to the object that invoked the event that fired the handler</param>
+        /// <param name="e">Event argument(s)</param>
         private void SaveTextEncrypt_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
@@ -69,10 +84,15 @@ namespace GUI
 
             if (sfd.ShowDialog() == true)
             {
-                biz.WriteClearTextToFile(sfd.FileName);
+                biz.WriteClearTextToFile(sfd.FileName); // Does nothing currently
             }
         }
 
+        /// <summary>
+        /// Loads decrypted text from file and puts it into the encryptedText property of ClassBIZ (or, is supposed to)
+        /// </summary>
+        /// <param name="sender">Refers to the object that invoked the event that fired the handler</param>
+        /// <param name="e">Event argument(s)</param>
         private void LoadTextDecrypt_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -82,10 +102,15 @@ namespace GUI
 
             if (ofd.ShowDialog() == true)
             {
-                biz.ReadEncryptedTextFromFile(ofd.FileName);
+                biz.ReadEncryptedTextFromFile(ofd.FileName); // Does nothing currently
             }
         }
 
+        /// <summary>
+        /// Saves decrypted text to a file (or, is supposed to)
+        /// </summary>
+        /// <param name="sender">Refers to the object that invoked the event that fired the handler</param>
+        /// <param name="e">Event argument(s)</param>
         private void SaveTextDecrypt_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
@@ -95,7 +120,7 @@ namespace GUI
 
             if (sfd.ShowDialog() == true)
             {
-                biz.WriteEncryptedTextToFile(sfd.FileName);
+                biz.WriteEncryptedTextToFile(sfd.FileName); // Does nothing currently
             }
         }
     }

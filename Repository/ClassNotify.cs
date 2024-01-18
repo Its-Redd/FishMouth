@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 //using System.ComponentModel;
 
@@ -18,6 +13,10 @@ namespace Repository
 
         }
 
+        /// <summary>
+        /// Notifies the GUI that a property has changed
+        /// </summary>
+        /// <param name="propertyName">The name of the property that has changed</param>
         protected void Notify(string propertyName)
         {
             if (PropertyChanged != null)

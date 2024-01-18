@@ -6,6 +6,7 @@ namespace BIZ
 {
     public class ClassDummyText
     {
+        // Declare private variables
         private List<string> key;
         private Random rnd;
         private Encoding win1252 = Encoding.GetEncoding("Windows-1252");
@@ -14,10 +15,16 @@ namespace BIZ
 
         public ClassDummyText(List<string> list)
         {
+            // Initialize private variables
             rnd = new Random();
             key = list;
         }
 
+        /// <summary>
+        /// Makes a dummy string with random length
+        /// and random chars from the win1252 encoding
+        /// </summary>
+        /// <returns>String - Result</returns>
         public string MakeDummyString()
         {
             string res = "";
@@ -31,16 +38,20 @@ namespace BIZ
             return res;
         }
 
+        /// <summary>
+        /// Makes a random dummy char from the win1252 encoding
+        /// </summary>
+        /// <returns>String - a random char</returns>
         private string MakeDummyChar()
         {
             string res = "";
-            bool FoundInKey = false;
+            bool foundInKey = false;
 
             do
             {
                 res = win1252.GetString(new byte[] { (byte)rnd.Next(33, 123) });
-                FoundInKey = key.Contains(res);
-            } while (FoundInKey);
+                foundInKey = key.Contains(res);
+            } while (foundInKey);
 
             return res;
         }

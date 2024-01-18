@@ -5,58 +5,67 @@ namespace BIZ
 {
     public class ClassEncryptText
     {
+
+        // Declare private variables
         private List<string> key;
         private ClassDummyText CDT;
 
         public ClassEncryptText(List<string> inKey)
         {
+            // Initialize private variables
             key = inKey;
             CDT = new ClassDummyText(key);
         }
 
+        /// <summary>
+        /// Encrypts a string using the key
+        /// </summary>
+        /// <param name="inString">String to be encrypted</param>
+        /// <returns>string - Encrypted string</returns>
         public string EncryptString(string inString)
         {
-            // Starter med at tilføje Dummy tekst
+            // Add dummy string to res
             string res = CDT.MakeDummyString();
-            // Initialiser encoding
+
+            // Initializes encoding
             Encoding enc1252 = Encoding.GetEncoding("Windows-1252");
-            // Lav hele vores inString streng om til bytes.
+
+            // Divides the entire string into bytes
             byte[] asciiBytes = enc1252.GetBytes(inString);
 
-            // For hver byte i vores byte array
+            // For each byte in the byte array
             foreach (byte aByte in asciiBytes)
             {
-                // lav vores byte om til en char
+                // Turns the byte into a char
                 char aChar = (char)aByte;
-                // tilføj vores char til res string objektet ved brug af MakeCodeOfChar metoden
+
+                // Add the encrypted char to res
                 res += MakeCodeOfChar(aChar) + CDT.MakeDummyString();
             }
-
             return res;
         }
 
         /// <summary>
-        /// Bliver sendt en char værdi
-        /// Char værdien bliver lavet om til en int
+        /// Converts a char to a string of the index of the char in the key
         /// </summary>
-        /// <param name="aChar"></param>
-        /// <returns></returns>
+        /// <param name="aChar"> The char that needs to be converted</param>
+        /// <returns>string - returns the converted char</returns>
         private string MakeCodeOfChar(char aChar)
         {
             string res = "";
 
-            // Lav char om til en int
+            // Turn char into int
             int intChar = (int)aChar;
-            // Lav int om til en string
+
+            // Turn int into string (The number of the char in the ASCII table)
             string strChar = intChar.ToString();
 
-            // For hver char i vores string
+            // For each char in the strChar String, looks for the char in the key, and adds the index to res
             foreach (char aDigit in strChar)
             {
-                // tilføj til res string objektet ved brug af key listen
+                // Add the key[int.Parse(aDigit.ToString())] to res
                 res += key[int.Parse(aDigit.ToString())];
             }
-
             return res;
         }
     }

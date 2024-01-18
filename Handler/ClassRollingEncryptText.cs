@@ -5,26 +5,35 @@ namespace BIZ
 {
     public class ClassRollingEncryptText
     {
+        // Declare private variables
         private List<string> key;
         private ClassDummyText CDT;
         private int Jump = 3;
 
         public ClassRollingEncryptText(List<string> inKey)
         {
+            // Initialize private variables
             CDT = new ClassDummyText(inKey);
             key = inKey;
         }
 
+        /// <summary>
+        /// Encrypts a string using the key (Rolling)
+        /// </summary>
+        /// <param name="inString"> String to be encrypted </param>
+        /// <returns>string - Encrypted string</returns>
         public string RollingEncryptString(string inString)
         {
+            // Adds some dummy text to res
             string res = CDT.MakeDummyString();
 
-            // Initialiser encoding
+            // Initializes encoding
             Encoding enc1252 = Encoding.GetEncoding("Windows-1252");
-            // Lav hele vores inString streng om til bytes.
+
+            // Divides the entire string into bytes
             byte[] asciiBytes = enc1252.GetBytes(inString);
 
-            // For hver byte i vores byte array
+            // For each byte in the byte array, add the encrypted char to res
             foreach (char aByte in asciiBytes)
             {
                 res += MakeCodeOfChar(aByte) + CDT.MakeDummyString();
@@ -34,23 +43,28 @@ namespace BIZ
             return res;
         }
 
+        /// <summary>
+        /// Turns a char into a string of the index of the char in the key
+        /// </summary>
+        /// <param name="aChar"> The char that needs to be converted</param>
+        /// <returns>string - returns the converted char</returns>
         private string MakeCodeOfChar(char aChar)
         {
             string res = "";
             int JumpUp = 3;
 
-            // Lav char om til en int
+            // Turn char into int
             int intChar = (int)aChar;
-            // Lav int om til en string
+            // turn int into string
             string strChar = intChar.ToString();
 
-            // For hver char i vores string
+            // For each char in the strChar String
             foreach (char aDigit in strChar)
             {
                 int intDigit = ((int.Parse(aDigit.ToString())) + Jump) % 10; // Math
                 Jump += JumpUp; // JumpUp   
 
-                // tilføj til res string objektet ved brug af key listen
+                // Add the key[intDigit] to res
                 res += key[intDigit];
             }
 

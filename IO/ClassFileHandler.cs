@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace IO
 {
@@ -12,10 +8,12 @@ namespace IO
         Encoding enc1252;
         Encoding encUTF8;
 
-        public ClassFileHandler() {
+        public ClassFileHandler()
+        {
             enc1252 = Encoding.GetEncoding("Windows-1252");
             encUTF8 = Encoding.GetEncoding("UTF-8");
         }
+
 
         public string ReadTextFromFile(string path)
         {
